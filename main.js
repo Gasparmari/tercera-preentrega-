@@ -9,6 +9,27 @@ class Producto {
 }
 
 
+
+function guardarProductoEnLs(producto) {
+    
+    const productoAAgregar = {
+        nombre: producto.nombre,
+        precio: producto.precio
+    }
+
+    const ls = localStorage.getItem("carrito")
+
+    if(ls === null) {
+        const carrito = [productoAAgregar]
+        localStorage.setItem("carrito", JSON.stringify(carrito))
+
+
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+    }
+}
+
+
+
 function renderizarProductos(productos) {
 
     const contenedor = document.getElementById("contenedor");
@@ -34,6 +55,13 @@ function renderizarProductos(productos) {
         const button = document.createElement("button");
         button.className = "btn btn-primary";
         button.innerText = "Comprar";
+        
+        
+        button.addEventListener("click", () => {
+
+            guardarProductoEnLs(producto)
+        }) 
+
 
         divCardBody.append(h5, p);
         divCardBody.append(h5, p, button);
